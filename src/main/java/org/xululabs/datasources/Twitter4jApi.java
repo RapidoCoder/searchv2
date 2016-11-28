@@ -47,20 +47,20 @@ public class Twitter4jApi {
 	 * @throws TwitterException
 	 */
 	public ArrayList<Long> retweet(Twitter twitter, ArrayList<Long> tweetIds) throws TwitterException {
-		ArrayList<Long> remainingTweetIds = new ArrayList<Long>();
+		ArrayList<Long> retweetIds = new ArrayList<Long>();
 		int index = 0;
 		while (twitter.getRetweetsOfMe().getRateLimitStatus().getLimit() > 0 && index < tweetIds.size()) {
 			try {
 				twitter.retweetStatus(tweetIds.get(index));
+				retweetIds.add(tweetIds.get(index));
 			} catch (Exception ex) {
               
 			}
 			index++;
 		}
-		if (index != tweetIds.size() - 1)
-			remainingTweetIds = new ArrayList<Long>(tweetIds.subList(index, tweetIds.size()));
+		
 		twitter = null;
-		return remainingTweetIds;
+		return retweetIds;
 
 	}
 

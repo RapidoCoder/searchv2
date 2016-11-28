@@ -131,8 +131,8 @@ public class DeployServer extends AbstractVerticle {
 			 TypeReference<HashMap<String, Object>> credentialsTypeReference =  new TypeReference<HashMap<String,Object>>() {};
 	         HashMap<String, Object> credentials = mapper.readValue(credentialsjson, credentialsTypeReference);
 			
-	         ArrayList<Long> unretweetIds =  twitter4jApi.retweet(this.getTwitterInstance(credentials.get("consumerKey").toString(), credentials.get("consumerSecret").toString(), credentials.get("accessToken").toString(), credentials.get("accessTokenSecret").toString()), tweetsIdsList);
-	         response = mapper.writeValueAsString(unretweetIds);     
+	         ArrayList<Long> retweetIds =  twitter4jApi.retweet(this.getTwitterInstance(credentials.get("consumerKey").toString(), credentials.get("consumerSecret").toString(), credentials.get("accessToken").toString(), credentials.get("accessTokenSecret").toString()), tweetsIdsList);
+	         response = mapper.writeValueAsString(retweetIds);     
 		
 		} catch (Exception ex) {
              response = "{\"status\" : \"error\", \"msg\" :"+ex.getMessage()+ "}";
